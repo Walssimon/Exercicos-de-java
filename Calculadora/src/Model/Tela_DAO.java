@@ -8,6 +8,9 @@ public class Tela_DAO {
 public static String nome;
 public static void soliciteoperacao(){
    nome = JOptionPane.showInputDialog(null,"Adição (1) \nSubtração (2) \nMultiplicação (3) \nDivisão (4) \nSair (5) ","solicite Operação",1);
+   //String x2=x.toLowerCase(); Minusculo
+   //String x2=x.toUpperCase(); Maiusculo
+   
    int valor = Integer.parseInt(nome);
    if (valor == 1){
        Model.Classex_DAO.Soma();
@@ -21,6 +24,7 @@ public static void soliciteoperacao(){
       JOptionPane.showMessageDialog(null, "Tchal!!!","Sair",1); 
    }else {
    JOptionPane.showMessageDialog(null, "Opção Inválida","Error",-1);
+   Model.Tela_DAO.soliciteoperacao();
    }
 }
 }
