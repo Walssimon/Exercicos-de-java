@@ -8,7 +8,9 @@ package View;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -44,7 +46,13 @@ public class Inicio_GUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("APRENDER?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
+        clienteQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Cliente c");
+        clienteList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clienteQuery.getResultList();
+        clienteQuery1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Cliente c");
+        clienteList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clienteQuery1.getResultList();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -57,6 +65,17 @@ public class Inicio_GUI extends javax.swing.JFrame {
         GRAVAR = new javax.swing.JButton();
         FECHAR = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabela = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        nome2 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        email2 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        tel2 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        cod2 = new javax.swing.JTextField();
+        CONSULTAR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -125,21 +144,91 @@ public class Inicio_GUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Cadastrar", jPanel1);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 393, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
-        );
+        jPanel2.setLayout(null);
+
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteList1, tabela);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cliCod}"));
+        columnBinding.setColumnName("Código");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cliNome}"));
+        columnBinding.setColumnName("Nome");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cliEmail}"));
+        columnBinding.setColumnName("Email");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cliTel}"));
+        columnBinding.setColumnName("Telefone");
+        columnBinding.setColumnClass(java.math.BigInteger.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane1.setViewportView(tabela);
+
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(0, 0, 390, 91);
+
+        jLabel5.setText("Nome:");
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(10, 160, 31, 14);
+
+        nome2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nome2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(nome2);
+        nome2.setBounds(50, 150, 190, 30);
+
+        jLabel6.setText("Email:");
+        jPanel2.add(jLabel6);
+        jLabel6.setBounds(10, 200, 28, 14);
+
+        email2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                email2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(email2);
+        email2.setBounds(50, 190, 190, 30);
+
+        jLabel7.setText("Telefone");
+        jPanel2.add(jLabel7);
+        jLabel7.setBounds(0, 240, 50, 14);
+
+        tel2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tel2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(tel2);
+        tel2.setBounds(50, 230, 190, 30);
+
+        jLabel8.setText("Codigo:");
+        jPanel2.add(jLabel8);
+        jLabel8.setBounds(20, 110, 50, 14);
+
+        cod2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cod2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cod2);
+        cod2.setBounds(70, 100, 170, 30);
+
+        CONSULTAR.setText("Consultar");
+        CONSULTAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CONSULTARActionPerformed(evt);
+            }
+        });
+        jPanel2.add(CONSULTAR);
+        CONSULTAR.setBounds(290, 240, 90, 23);
 
         jTabbedPane1.addTab("Gerenciar", jPanel2);
 
         getContentPane().add(jTabbedPane1);
         jTabbedPane1.setBounds(0, 0, 400, 300);
+
+        bindingGroup.bind();
 
         setSize(new java.awt.Dimension(400, 300));
         setLocationRelativeTo(null);
@@ -200,6 +289,87 @@ telefone = Long.valueOf(tel.getText());// recebendo o telefone
         System.exit(0);
     }//GEN-LAST:event_FECHARActionPerformed
 
+    private void email2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_email2ActionPerformed
+
+    private void nome2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nome2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nome2ActionPerformed
+
+    private void tel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tel2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tel2ActionPerformed
+
+    private void cod2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cod2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cod2ActionPerformed
+
+    private void CONSULTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CONSULTARActionPerformed
+        //==> Inicio
+        try{     //Iniciando o possivel tratamento de erros
+            //Declarando a variavel código
+            int cod = Integer.valueOf(cod2.getText());
+            try {// Tratamento de erro para a conexao
+                // Declarando  a variavel de conexão con
+                // e estabelendo a conexão
+                Connection con = null;
+
+                try {
+                    con = (Connection) DriverManager.getConnection(url2, username, password);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Inicio_GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                // Declarando uma string com o comando mySQL para consulta
+                String sql = "SELECT cli_nome,cli_email, cli_tel FROM cliente where cli_cod = "+cod;
+                // Criando variavel que executara o comando da string sql
+                Statement stm = (Statement) con.createStatement();
+                try//Tratamento de erro da consulta
+                { //Criando variavel que exibira os resultados
+                    //Executando o comando da string sql na variavel rs
+                    ResultSet rs = stm.executeQuery(sql);
+
+                    int i=0; // Variavel utilizada para saber se ha dados cadastrados
+
+                    while (rs.next()) {  // Criando variaveis que receberão os valores do banco de dados
+                        String nome = rs.getString("cli_nome");
+                        String email = rs.getString("cli_email");
+                        String telefone = rs.getString("cli_tel");
+
+                        i++;
+
+                        //JOptionPane.showMessageDialog(null,"Nome: " + nome + "\nEmail: " +telefone + "\nTelefone: " +telefone, "Resultado",-1);
+                        nome2.setText(String.valueOf(nome));
+                        email2.setText(String.valueOf(email));
+                        tel2.setText(String.valueOf(telefone));
+
+                    }
+
+                    if(i==0){ // Verificando se ha dados cadastrados atraves da variavel i
+
+                        JOptionPane.showMessageDialog(null,"Dado não cadastrado","Resultado",-1);
+
+                    }
+
+                } catch (Exception ex) { // Consulta mal sucedida
+                    JOptionPane.showMessageDialog(null,"\nErro ao consultar!","ERRO",0);
+                }
+
+            } catch (SQLException ex) {
+                // Conexão com servidor mal sucedida
+                JOptionPane.showMessageDialog(null,"Erro ao conectar com o servidor","ERRO!",0);
+            }
+
+        }catch(NumberFormatException erro){
+            // Código fora do formato
+            JOptionPane.showMessageDialog(null,"Digite o código corretamante","ERRO",0);
+            cod2.setText("");
+        }
+
+        //--> Fim
+    }//GEN-LAST:event_CONSULTARActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -236,17 +406,34 @@ telefone = Long.valueOf(tel.getText());// recebendo o telefone
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CONSULTAR;
     private javax.swing.JButton FECHAR;
     private javax.swing.JButton GRAVAR;
+    private java.util.List<View.Cliente> clienteList;
+    private java.util.List<View.Cliente> clienteList1;
+    private javax.persistence.Query clienteQuery;
+    private javax.persistence.Query clienteQuery1;
+    private javax.swing.JTextField cod2;
     private javax.swing.JTextField email;
+    private javax.swing.JTextField email2;
+    private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField nome;
+    private javax.swing.JTextField nome2;
+    private javax.swing.JTable tabela;
     private javax.swing.JTextField tel;
+    private javax.swing.JTextField tel2;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
