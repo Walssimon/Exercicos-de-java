@@ -76,6 +76,7 @@ public class Inicio_GUI extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         cod2 = new javax.swing.JTextField();
         CONSULTAR = new javax.swing.JButton();
+        ALTERAR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -222,6 +223,15 @@ public class Inicio_GUI extends javax.swing.JFrame {
         });
         jPanel2.add(CONSULTAR);
         CONSULTAR.setBounds(290, 240, 90, 23);
+
+        ALTERAR.setText("Alterar");
+        ALTERAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ALTERARActionPerformed(evt);
+            }
+        });
+        jPanel2.add(ALTERAR);
+        ALTERAR.setBounds(300, 160, 73, 23);
 
         jTabbedPane1.addTab("Gerenciar", jPanel2);
 
@@ -370,6 +380,47 @@ telefone = Long.valueOf(tel.getText());// recebendo o telefone
         //--> Fim
     }//GEN-LAST:event_CONSULTARActionPerformed
 
+    private void ALTERARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ALTERARActionPerformed
+        //-->Inicio
+        
+        nom = nome2.getText(); // recebendo o nome
+      em = email2.getText(); // recebendo o email         
+      telefone = Long.valueOf(tel2.getText());// recebendo o telefone
+       
+      try {     
+            Connection con = null;
+      try {
+            con = (Connection) DriverManager.getConnection(url2, username, password);
+      }catch (SQLException ex) {
+            Logger.getLogger(Inicio_GUI.class.getName()).log(Level.SEVERE, null, ex);
+      }
+            String sql = "UPDATE cliente SET cli_nome='"+nom+"',cli_email='"+email+"',cli_tel='"+telefone+"' WHERE cli_Cod="+cod2.getText();
+            
+     
+            try { 
+                PreparedStatement inserir = (PreparedStatement) con.prepareStatement(sql);
+                inserir.execute(); // Executando a inserção
+
+                JOptionPane.showMessageDialog(null,"\nInserção realizada com sucesso!!!\n","",-1);
+                nome2.setText("");
+                email2.setText("");
+                tel2.setText("");
+                cod2.setText("");
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null,"\nErro na inserção!","ERRO!",0);
+            }
+
+        }catch(NumberFormatException erro){
+            // Tratamento de erro caso o usuario não digite o telefone corretamente
+            JOptionPane.showMessageDialog(null,"Digite os dados corretamente","ERRO",0);
+            tel2.setText("");
+        }    
+
+        
+        //-->Fim
+    }//GEN-LAST:event_ALTERARActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -406,6 +457,7 @@ telefone = Long.valueOf(tel.getText());// recebendo o telefone
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ALTERAR;
     private javax.swing.JButton CONSULTAR;
     private javax.swing.JButton FECHAR;
     private javax.swing.JButton GRAVAR;
