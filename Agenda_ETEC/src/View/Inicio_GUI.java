@@ -27,7 +27,7 @@ public class Inicio_GUI extends javax.swing.JFrame {
  static String em;
  static long telefone;
     
-  String url2 = "jdbc:mysql://localhost:3309/aprender"; // enderço do BD
+  String url2 = "jdbc:mysql://localhost/aprender"; // enderço do BD
   String username = "root";        //nome de um usuário de seu BD
   String password = "";  // senha do BD
 
@@ -48,7 +48,7 @@ public class Inicio_GUI extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("APRENDER?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("aprender?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
         clienteQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Cliente c");
         clienteList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clienteQuery.getResultList();
         clienteQuery1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Cliente c");
@@ -56,6 +56,8 @@ public class Inicio_GUI extends javax.swing.JFrame {
         entityManager0 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("aprender?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
         clienteQuery2 = java.beans.Beans.isDesignTime() ? null : entityManager0.createQuery("SELECT c FROM Cliente c");
         clienteList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clienteQuery2.getResultList();
+        clienteQuery3 = java.beans.Beans.isDesignTime() ? null : entityManager0.createQuery("SELECT c FROM Cliente c");
+        clienteList3 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clienteQuery3.getResultList();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -226,7 +228,7 @@ public class Inicio_GUI extends javax.swing.JFrame {
         jPanel2.add(EXCLUIR);
         EXCLUIR.setBounds(270, 190, 63, 23);
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteList2, jTable1);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteList3, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cliCod}"));
         columnBinding.setColumnName("Cli Cod");
         columnBinding.setColumnClass(Integer.class);
@@ -524,9 +526,11 @@ telefone = Long.valueOf(tel.getText());// recebendo o telefone
     private java.util.List<View.Cliente> clienteList;
     private java.util.List<View.Cliente> clienteList1;
     private java.util.List<View.Cliente> clienteList2;
+    private java.util.List<View.Cliente> clienteList3;
     private javax.persistence.Query clienteQuery;
     private javax.persistence.Query clienteQuery1;
     private javax.persistence.Query clienteQuery2;
+    private javax.persistence.Query clienteQuery3;
     private javax.swing.JTextField cod2;
     private javax.swing.JTextField email;
     private javax.swing.JTextField email2;

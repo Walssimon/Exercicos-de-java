@@ -66,6 +66,24 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;View.Cliente&gt;"/>
       </AuxValues>
     </Component>
+    <Component class="javax.persistence.Query" name="clienteQuery3">
+      <Properties>
+        <Property name="query" type="java.lang.String" value="SELECT c FROM Cliente c"/>
+        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
+          <ComponentRef name="entityManager0"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="java.util.List" name="clienteList3">
+      <Properties>
+        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
+          <ComponentRef name="clienteQuery3"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;View.Cliente&gt;"/>
+      </AuxValues>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -401,7 +419,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="jTable1">
                   <BindingProperties>
-                    <BindingProperty name="elements" source="clienteList2" target="jTable1" targetPath="elements" updateStrategy="0" immediately="true">
+                    <BindingProperty name="elements" source="clienteList3" target="jTable1" targetPath="elements" updateStrategy="0" immediately="true">
                       <Subbinding sourcePath="${cliCod}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
                       </Subbinding>
