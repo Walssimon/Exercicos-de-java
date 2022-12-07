@@ -401,7 +401,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="270" y="190" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="300" y="200" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -417,9 +417,9 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable1">
+                <Component class="javax.swing.JTable" name="tabela">
                   <BindingProperties>
-                    <BindingProperty name="elements" source="clienteList3" target="jTable1" targetPath="elements" updateStrategy="0" immediately="true">
+                    <BindingProperty name="elements" source="clienteList3" target="tabela" targetPath="elements" updateStrategy="0" immediately="true">
                       <Subbinding sourcePath="${cliCod}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
                       </Subbinding>

@@ -9,11 +9,14 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -33,7 +36,55 @@ public class Inicio_GUI extends javax.swing.JFrame {
 
     
     //-->Fim
+    //--> INICIO Atualizar tabela
+  
+  public static DefaultTableModel  cliente(ResultSet rs) {
+        try {
+           ResultSetMetaData metaData = rs.getMetaData();
+         int numberOfColumns = metaData.getColumnCount();
+            Vector columnNames = new Vector();
+       // AS LINHAS ABAIXO SÃO REFERENTES AOS CAMPOS DA TABELA CLIENTE
+            columnNames.addElement("Código");
+            columnNames.addElement("Nome");
+            columnNames.addElement("E-mail");
+            columnNames.addElement("Telefone");
+         
+            Vector rows = new Vector();
+            while (rs.next()) {
+                Vector newRow = new Vector();
+                for (int i = 1; i <= numberOfColumns; i++) {
+                    newRow.addElement(rs.getObject(i));
+                }
+                rows.addElement(newRow);
+            }
+           return new DefaultTableModel(rows, columnNames);
+       } catch (Exception e) {
+
+           return null;
+        }
+        }
+
+          public void refresh(){
     
+try{
+   Connection conn;
+          conn = (Connection) DriverManager.getConnection(url2, username, password);
+
+    System.out.println("realizado");
+            String sql = "SELECT * FROM cliente;";
+PreparedStatement pst = (PreparedStatement) conn.prepareStatement(sql);
+ResultSet rs = pst.executeQuery();
+tabela.setModel(cliente(rs));
+}
+catch(Exception e){
+JOptionPane.showMessageDialog(null, e);
+}    
+    } 
+
+  //-->Fim Atualizar tabela
+  
+  
+  
     public Inicio_GUI() {
         initComponents();
     }
@@ -82,7 +133,7 @@ public class Inicio_GUI extends javax.swing.JFrame {
         ALTERAR = new javax.swing.JButton();
         EXCLUIR = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabela = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -226,9 +277,9 @@ public class Inicio_GUI extends javax.swing.JFrame {
             }
         });
         jPanel2.add(EXCLUIR);
-        EXCLUIR.setBounds(270, 190, 63, 23);
+        EXCLUIR.setBounds(300, 200, 63, 23);
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteList3, jTable1);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteList3, tabela);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cliCod}"));
         columnBinding.setColumnName("Cli Cod");
         columnBinding.setColumnClass(Integer.class);
@@ -244,7 +295,7 @@ public class Inicio_GUI extends javax.swing.JFrame {
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
 
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabela);
 
         jPanel2.add(jScrollPane1);
         jScrollPane1.setBounds(0, 0, 390, 90);
@@ -303,7 +354,7 @@ telefone = Long.valueOf(tel.getText());// recebendo o telefone
             tel.setText("");
         }
 
-       
+       refresh();
               
 
 
@@ -432,7 +483,7 @@ telefone = Long.valueOf(tel.getText());// recebendo o telefone
             JOptionPane.showMessageDialog(null,"Digite os dados corretamente","ERRO",0);
             tel2.setText("");
         }    
-
+        refresh();
         
         //-->Fim
     }//GEN-LAST:event_ALTERARActionPerformed
@@ -477,7 +528,7 @@ telefone = Long.valueOf(tel.getText());// recebendo o telefone
             cod2.setText("");
 
         }
-
+        refresh();
         
        //-->fim
     }//GEN-LAST:event_EXCLUIRActionPerformed
@@ -548,9 +599,9 @@ telefone = Long.valueOf(tel.getText());// recebendo o telefone
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField nome;
     private javax.swing.JTextField nome2;
+    private javax.swing.JTable tabela;
     private javax.swing.JTextField tel;
     private javax.swing.JTextField tel2;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
